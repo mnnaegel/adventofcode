@@ -18,7 +18,7 @@ def map_seed_to_location(seed, maps):
   for i,mp in enumerate(maps):
     for j, val in enumerate(mp):
       source, dest, map_range = val
-      if source <= current <= source + map_range:
+      if source <= current <= source + map_range - 1:
         current = dest + (current - source)
         maps_used[i] = j
         break
@@ -58,10 +58,9 @@ for seed,seed_range in seed_pairs:
   while l <= seed + seed_range - 1:
     l_location, l_maps_used = map_seed_to_location(l, maps)
     
-    r = seed + seed_range
+    r = seed + seed_range - 1
     while l <= r:
       r_location, r_maps_used = map_seed_to_location(r, maps)
-      print("l", l, "r", r, "l_maps_used", l_maps_used, "r_maps_used", r_maps_used)
       
       if l_maps_used == r_maps_used:
         min_location = min(min_location, l_location)
